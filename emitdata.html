@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="/socket.io/socket.io.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	</head>
+	<body>
+		<!-- <center> -->
+			<!-- <button style="margin:auto auto;position:absolute;top:30%;left:25%;height:20%;width:50%;font-size:50px;" id="senddata" class="btn btn-outline-success btn-lg">REFRESH STREAM</button> -->
+			<!-- <p class="h1" id="lastrefresh">Last Refreshed at : </p> -->
+		<!-- </center> -->
+		
+		<div class="card" style="margin:5%;font-family:calibri;">
+		  <div class="card-header">
+			Refresh Stream
+		  </div>
+		  <div class="card-body">
+			<!-- <h5 class="card-title">Hit the button to refresh on-going stream</h5> -->
+			<p class="card-text" id="lastrefresh">Last Refreshed at : NA</p>
+			<button id="senddata" class="btn btn-outline-success btn-lg">REFRESH STREAM</button>
+		  </div>
+		</div>
+		
+		
+	</body>
+	<script>
+		var socket = io();
+		var datatosend = document.getElementById("senddata");
+		
+		datatosend.addEventListener('click', function(){
+			const date1 = new Date();
+			socket.emit("timevalue", date1.toString());
+			<!-- console.log(date1); -->
+			document.getElementById("lastrefresh").innerHTML = "Last Refreshed at : <b>"+date1+"</b>";
+		})
+	</script>
+</html>

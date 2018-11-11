@@ -1,0 +1,25 @@
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    var audioBuffer = null;
+    var context = null;
+    window.addEventListener('load', init, false);
+    function init() {
+        try {
+            context = new webkitAudioContext();
+        } catch(e) {
+            alert('Web Audio API is not supported in this browser');
+        }
+    }
+
+    function decodeHandler(buffer) {
+        console.log(data);
+    }
+
+    var socket = io.connect('http://127.0.0.1:5000');
+    socket.on('message', function (data) {
+            // HERE IS THE PROBLEM
+			data = Base64Binary.decodeArrayBuffer(data);
+			console.log(data);
+        context.decodeAudioData(data, decodeHandler, function(e) { console.log(e); });
+    });
+</script>
