@@ -7,7 +7,8 @@ var ss = require('socket.io-stream');
 
 app.use(express.static(`${__dirname}/html`));
 
-server.listen('5001');
+// server.listen('5001');
+server.listen(process.env.PORT || 3000);
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/index2.html');
